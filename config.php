@@ -28,9 +28,22 @@ try {
         password_hash VARCHAR(255) NULL,
         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
-    $pdo->exec('ALTER TABLE users MODIFY google_id VARCHAR(255) NULL');
-    $pdo->exec('ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash VARCHAR(255) NULL AFTER avatar_url');
 } catch (PDOException $exception) {
     http_response_code(503);
     exit('IdeaVault is temporarily unavailable. Check the local database configuration.');
+}
+
+try {
+    $columns = $pdo->query("SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'users'")->fetchAll(PDO::FETCH_COLUMN);
+    if (!in_array('google_id', $columns, true) || !in_array('password_hash', $columns, true)) {
+        if (in_array('google_id', $columns, true)) {
+            $pdo->exec('ALTER TABLE users MODIFY google_id VARCHAR(255) NULL');
+        }
+        if (!in_array('password_hash', $columns, true)) {
+            $pdo->exec('ALTER TABLE users ADD password_hash VARCHAR(255) NULL AFTER avatar_url');
+        }
+    }
+} catch (PDOException $exception) {
+    http_response_code(503);
+    exit('IdeaVault database setup is incomplete. Check the users table configuration.');
 }
