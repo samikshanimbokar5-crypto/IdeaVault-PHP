@@ -39,9 +39,13 @@ Add an idea containing `O'Reilly` in any text field. It must save and display no
 
 PHP syntax lint passes with the XAMPP PHP binary. Runtime CRUD, MySQL connectivity, search/filter, validation, responsive screenshots, and the O'Reilly test require Apache and MySQL to be started locally. No deployment URL or GitHub URL is claimed until those external services and permissions are actually verified.
 
-## Deployment and future scope
+## Deployment
 
-Deployment needs a PHP runtime and reachable hosted MySQL database. Render or another suitable provider can be configured after account authorization and production environment variables are available; InfinityFree is intentionally not used. Future additions could include authentication, ownership, tags, pagination, attachments, and moderation.
+The repository includes a `Dockerfile` and `render.yaml` for a Render Docker web service. Render can build and serve the PHP application, but the service still needs a separate reachable MySQL provider because Render's native managed database is PostgreSQL. Import `database.sql` into that MySQL database, then set `IDEAVAULT_DB_HOST`, `IDEAVAULT_DB_PORT`, `IDEAVAULT_DB_NAME`, `IDEAVAULT_DB_USER`, and `IDEAVAULT_DB_PASSWORD` as Render environment variables. Never commit those values.
+
+Deployment is only complete after the Render service is connected to the GitHub repository, the production MySQL schema is imported, the variables are set, and the public dashboard plus a CRUD operation are tested. InfinityFree is intentionally not used.
+
+Future additions could include authentication, ownership, tags, pagination, attachments, and moderation.
 
 ## Originality
 

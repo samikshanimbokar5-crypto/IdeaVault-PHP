@@ -1,0 +1,7 @@
+.git
+.gitignore
+config.local.php
+.env
+README.md
+database.sql
+*.log
