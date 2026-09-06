@@ -10,7 +10,8 @@ IdeaVault is a student project idea repository built with PHP, MySQL, PDO, HTML,
 - Filter by domain, difficulty, and status
 - Server-side validation, CSRF protection, safe output escaping, and feedback messages
 - MySQL CRUD through PDO prepared statements
-- Optional Google sign-in with OAuth state protection and session-based users
+- Email/password registration and login with secure password hashing
+- Optional Google sign-in with OAuth state protection
 
 ## Structure
 
@@ -39,6 +40,10 @@ The login page and Google OAuth flow are included but optional; the core reposit
 `https://YOUR-RAILWAY-DOMAIN/google-callback.php`
 
 Set these server-only variables in Railway: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GOOGLE_REDIRECT_URI`. Never put the client secret in GitHub or browser code. The `users` table from `database.sql` must also be imported into the production database. The Google button will remain disabled with a setup message until all three variables are present.
+
+## Local accounts
+
+The app now opens on `login.php`. New users can choose **Create an account**, and passwords are stored with PHP's `password_hash()`; plaintext passwords are never saved. For an existing Railway database, run `migrations/001_local_auth.sql` once before registering the first account. New databases can use the updated `database.sql` directly. Google sign-in remains optional and can be enabled later.
 
 ### O'Reilly test
 

@@ -2,6 +2,8 @@
 
 require __DIR__ . '/config.php';
 require __DIR__ . '/functions.php';
+require __DIR__ . '/auth.php';
+require_login();
 
 $search = trim((string) ($_GET['search'] ?? ''));
 $domain = trim((string) ($_GET['domain'] ?? ''));
