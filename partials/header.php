@@ -14,6 +14,7 @@
         <a class="<?= $active === 'dashboard' ? 'active' : '' ?>" href="index.php">Dashboard</a>
         <a class="<?= $active === 'ideas' ? 'active' : '' ?>" href="index.php#ideas">Browse ideas</a>
         <a class="button button-small" href="index.php#new-idea">+ New idea</a>
+        <?php if (current_user()): ?><a class="account-link" href="logout.php">Log out</a><?php else: ?><a class="account-link" href="login.php">Log in</a><?php endif; ?>
     </nav>
 </header>
 <main class="shell">

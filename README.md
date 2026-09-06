@@ -10,6 +10,7 @@ IdeaVault is a student project idea repository built with PHP, MySQL, PDO, HTML,
 - Filter by domain, difficulty, and status
 - Server-side validation, CSRF protection, safe output escaping, and feedback messages
 - MySQL CRUD through PDO prepared statements
+- Optional Google sign-in with OAuth state protection and session-based users
 
 ## Structure
 
@@ -30,6 +31,14 @@ For another environment, set `IDEAVAULT_DB_HOST`, `IDEAVAULT_DB_PORT`, `IDEAVAUL
 The `project_ideas` table uses an auto-incrementing primary key. Required fields use `NOT NULL`; difficulty and status use controlled enums; `created_at` records creation time. The app demonstrates INSERT, SELECT, parameterized search/filter, UPDATE, and DELETE.
 
 Every request value used in SQL is passed to `PDO::prepare()` and `execute()` as a named parameter. User output passes through `htmlspecialchars()` via `e()`, and POST mutations require a session-backed CSRF token. Database errors are not shown to visitors.
+
+## Google sign-in setup
+
+The login page and Google OAuth flow are included but optional; the core repository remains publicly viewable until access control is explicitly enabled. In Google Cloud Console, create an OAuth client of type **Web application** and add this exact authorized redirect URI:
+
+`https://YOUR-RAILWAY-DOMAIN/google-callback.php`
+
+Set these server-only variables in Railway: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GOOGLE_REDIRECT_URI`. Never put the client secret in GitHub or browser code. The `users` table from `database.sql` must also be imported into the production database. The Google button will remain disabled with a setup message until all three variables are present.
 
 ### O'Reilly test
 

@@ -89,3 +89,15 @@ function page_footer(): void
 {
     require __DIR__ . '/partials/footer.php';
 }
+
+function current_user(): ?array
+{
+    return $_SESSION['user'] ?? null;
+}
+
+function google_configured(array $config): bool
+{
+    return $config['google_client_id'] !== ''
+        && $config['google_client_secret'] !== ''
+        && $config['google_redirect_uri'] !== '';
+}

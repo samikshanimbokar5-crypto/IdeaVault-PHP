@@ -6,4 +6,7 @@ return [
     'database' => getenv('IDEAVAULT_DB_NAME') ?: getenv('MYSQLDATABASE') ?: getenv('MYSQL_DATABASE') ?: 'ideavault_db',
     'username' => getenv('IDEAVAULT_DB_USER') ?: getenv('MYSQLUSER') ?: getenv('MYSQL_USER') ?: 'root',
     'password' => getenv('IDEAVAULT_DB_PASSWORD') ?: getenv('MYSQLPASSWORD') ?: getenv('MYSQL_PASSWORD') ?: '',
+    'google_client_id' => getenv('GOOGLE_CLIENT_ID') ?: '',
+    'google_client_secret' => getenv('GOOGLE_CLIENT_SECRET') ?: '',
+    'google_redirect_uri' => getenv('GOOGLE_REDIRECT_URI') ?: '',
 ];
