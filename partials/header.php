@@ -14,7 +14,13 @@
         <a class="<?= $active === 'dashboard' ? 'active' : '' ?>" href="index.php">Dashboard</a>
         <a class="<?= $active === 'ideas' ? 'active' : '' ?>" href="index.php#ideas">Browse ideas</a>
         <a class="button button-small" href="index.php#new-idea">+ New idea</a>
-        <?php if (current_user()): ?><a class="account-link" href="logout.php">Log out</a><?php else: ?><a class="account-link" href="login.php">Log in</a><?php endif; ?>
+        <?php if (current_user()): ?>
+            <?php $user = current_user(); $initial = strtoupper(substr(trim($user['name'] ?: $user['email']), 0, 1)); ?>
+            <details class="account-menu">
+                <summary aria-label="Open account menu"><span class="avatar"><?= e($initial) ?></span><span class="account-name"><?= e($user['name']) ?></span></summary>
+                <div class="account-dropdown"><strong><?= e($user['name']) ?></strong><span><?= e($user['email']) ?></span><a href="logout.php">Log out</a></div>
+            </details>
+        <?php else: ?><a class="account-link" href="login.php">Log in</a><?php endif; ?>
     </nav>
 </header>
 <main class="shell">
