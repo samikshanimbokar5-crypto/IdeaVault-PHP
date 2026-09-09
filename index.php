@@ -12,7 +12,7 @@ $status = trim((string) ($_GET['status'] ?? ''));
 $where = [];
 $params = [];
 if ($search !== '') {
-    $where[] = '(title LIKE :search OR domain LIKE :search OR technologies LIKE :search OR description LIKE :search)';
+    $where[] = 'CONCAT(title, domain, technologies, description) LIKE :search';
     $params['search'] = '%' . $search . '%';
 }
 foreach (['domain', 'difficulty', 'status'] as $filter) {
