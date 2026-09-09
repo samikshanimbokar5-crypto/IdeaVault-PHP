@@ -3,7 +3,6 @@
 require __DIR__ . '/config.php';
 require __DIR__ . '/functions.php';
 require __DIR__ . '/auth.php';
-require_login();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect('index.php');

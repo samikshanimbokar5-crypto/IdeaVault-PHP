@@ -3,7 +3,6 @@
 require __DIR__ . '/config.php';
 require __DIR__ . '/functions.php';
 require __DIR__ . '/auth.php';
-require_login();
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$id) {

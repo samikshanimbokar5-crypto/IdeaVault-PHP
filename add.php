@@ -3,7 +3,6 @@
 require __DIR__ . '/config.php';
 require __DIR__ . '/functions.php';
 require __DIR__ . '/auth.php';
-require_login();
 
 $errors = [];
 $idea = ['title' => '', 'domain' => '', 'description' => '', 'technologies' => '', 'difficulty' => '', 'status' => 'Idea'];
