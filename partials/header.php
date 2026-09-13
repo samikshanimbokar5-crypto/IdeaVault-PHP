@@ -1,0 +1,29 @@
+<?php /** @var string $title */ /** @var string $active */ /** @var array|null $flash */ ?>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= e($title) ?> | IdeaVault</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="index.php"><span class="brand-mark">IV</span><span>IdeaVault</span></a>
+    <nav aria-label="Primary navigation">
+        <a class="<?= $active === 'dashboard' ? 'active' : '' ?>" href="index.php">Dashboard</a>
+        <a class="<?= $active === 'ideas' ? 'active' : '' ?>" href="index.php#ideas">Browse ideas</a>
+        <a class="button button-small" href="index.php#new-idea">+ New idea</a>
+        <?php if (current_user()): ?>
+            <?php $user = current_user(); $initial = strtoupper(substr(trim($user['name'] ?: $user['email']), 0, 1)); ?>
+            <details class="account-menu">
+                <summary aria-label="Open account menu"><span class="avatar"><?= e($initial) ?></span><span class="account-name"><?= e($user['name']) ?></span></summary>
+                <div class="account-dropdown"><strong><?= e($user['name']) ?></strong><span><?= e($user['email']) ?></span><a href="logout.php">Log out</a></div>
+            </details>
+        <?php else: ?><a class="account-link" href="login.php">Log in</a><?php endif; ?>
+    </nav>
+</header>
+<main class="shell">
+<?php if ($flash): ?>
+    <div class="alert alert-<?= e($flash['type']) ?>" role="status"><?= e($flash['message']) ?></div>
+<?php endif; ?>

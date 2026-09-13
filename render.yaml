@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ideavault-php
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: IDEAVAULT_DB_HOST
+        sync: false
+      - key: IDEAVAULT_DB_PORT
+        value: "3306"
+      - key: IDEAVAULT_DB_NAME
+        sync: false
+      - key: IDEAVAULT_DB_USER
+        sync: false
+      - key: IDEAVAULT_DB_PASSWORD
+        sync: false
