@@ -19,6 +19,11 @@ WORKDIR /var/www/html/
 # Apache permissions
 RUN chown -R www-data:www-data /var/www/html/
 
-EXPOSE 80
+# Copy entrypoint script and make it executable
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-CMD ["apache2-foreground"]
+# Use ENTRYPOINT to run the initialization script
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+
+EXPOSE 80
