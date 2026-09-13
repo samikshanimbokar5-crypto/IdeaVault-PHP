@@ -10,6 +10,10 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
+# Configure Apache to listen on Railway's port 8080
+RUN sed -i 's/Listen 80/Listen 8080/' /etc/apache2/ports.conf \
+    && sed -i 's/<VirtualHost \*:80>/<VirtualHost *:8080>/' /etc/apache2/sites-available/000-default.conf
+
 # Copy project files
 COPY . /var/www/html/
 
@@ -23,7 +27,8 @@ RUN chown -R www-data:www-data /var/www/html/
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Use ENTRYPOINT to run the initialization script
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+# Railway will connect to port 8080
+EXPOSE 8080
 
-EXPOSE 80
+# Run initialization script
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
